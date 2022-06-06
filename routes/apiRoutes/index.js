@@ -1,10 +1,17 @@
 //file system
 const fs = require('fs');
-const router = require("express").Router();
 const path = require("path");
+const { v4: uuidv4 } = require("uuid");
 
-const getText = () => {
-    const notes = fs.readFileSync(path.join(__dirname, '../../db/db.json'));
-    return JSON.parse (notes);
+//routing
+module.exports = function(app){
+
+    // get request 
+    app.get("/api/notes", (request, response) => {
+        let data = JSON.parse (fs.readFileSync("./db/db.json", "utf8"));
+        response.json(data);
+    });
+
+    //
 }
-module.exports = router;
+
