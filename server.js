@@ -6,8 +6,8 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 //routes
-const apiRoutes = require ('./routes/apiRoutes');
-const htmlRoutes = require ('./routes/htmlRoutes');
+require('./routes/apiRoutes')(app);
+require('./routes/htmlRoutes')(app);
 
 app.use (express.urlencoded({ extended: true }));
 app.use (express.static('public'));

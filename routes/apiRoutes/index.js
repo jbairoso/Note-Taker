@@ -15,8 +15,11 @@ module.exports = function (app) {
   app.post("/api/notes", (request, response) => {
     const newNotes = req.body;
     newNotes.id = uuidv4;
-    let data = JSON.parse(
-      fs.readFileSync(path.join(__dirname, "./db/db.json"), "utf8"));
+    //reads
+    let data = JSON.parse(fs.readFileSync(path.join(__dirname, "./db/db.json"), "utf8"));
     data.push(newNotes);
+    //writes
+    fs.writeFileSync(path.join(__dirname, "./db/db.json"),JSON.stringify(data));
+    res.json(data);
   });
 };
